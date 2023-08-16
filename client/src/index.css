@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background: linear-gradient(to right, #3333cc 0%, #6666ff 100%);
+}
+
+.form {
+  background: linear-gradient(to bottom right, #6600ff 0%, #9999ff 100%);
+  color: white;
+}
+
+.header {
+  background: linear-gradient(to right, #9966ff 0%, #3366ff 100%);
+}

@@ -11,7 +11,7 @@ module.exports.addDetails = async (req, res) => {
 
         const PrevEmail = await DetailsModel.findOne({ email: email });
         if (PrevEmail) {
-            return res.status(400).json({
+            return res.status(200).json({
                 message: "Email already exists",
                 result: false
             })
@@ -19,7 +19,7 @@ module.exports.addDetails = async (req, res) => {
 
         const PrevNumber = await DetailsModel.findOne({ number: number });
         if (PrevNumber) {
-            return res.status(400).json({
+            return res.status(200).json({
                 message: "Number already exists",
                 result: false
             })
@@ -60,7 +60,7 @@ module.exports.getAllDetails = async (req, res) => {
             return res.status(200).json({
                 message: "Data fetched successfully",
                 result: true,
-                data: info
+                response: info
             })
         }
     } catch (error) {
@@ -82,7 +82,7 @@ module.exports.getDetail = async (req, res) => {
             return res.status(200).json({
                 message: "Data fetched successfully",
                 result: true,
-                data: info
+                response: info
             })
         }
     } catch (error) {
