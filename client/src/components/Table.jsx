@@ -11,10 +11,16 @@ import AddUserForm from "./Forms/AddUserForm";
 import DeleteUserForm from "./Forms/DeleteUserForm";
 import UpdateUserDetalis from "./Forms/UpdateUserDetalis";
 import Checkbox from "@mui/material/Checkbox";
+import EditIcon from "@mui/icons-material/Edit";
+import SaveIcon from "@mui/icons-material/Save";
+import { ErrorMsg, SuccessMsg } from "../helper/notify";
 
 const Table = () => {
+  const [sendEmailTo, setSendEmailTo] = useState(
+    "jayantsawarkar4103@gmail.com"
+  );
   const [userDetails, setUserDetails] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [edit, setEdit] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [showDeleteForm, setShowDeleteForm] = useState(false);
   const [showUpdateForm, setShowUpdateFrom] = useState(false);
@@ -41,6 +47,9 @@ const Table = () => {
   useEffect(() => {
     getAllDetails();
   }, []);
+  useEffect(() => {
+    console.log(selectedDetails);
+  }, [selectedDetails]);
 
   /**
    *    Check box handler
@@ -53,6 +62,24 @@ const Table = () => {
       setSelectedDetails((prevSelected) =>
         prevSelected.filter((user) => user._id !== userId)
       );
+    }
+  };
+
+  /**
+   *    Send Mail
+   */
+  const sendMail = async () => {
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/api/v1/mail/sendMail",
+        {
+          selectedDetails: selectedDetails,
+          sendEmailTo: sendEmailTo,
+        }
+      );
+      SuccessMsg("🥳 Email sent successfully ");
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
@@ -78,6 +105,65 @@ const Table = () => {
         updateUserID={UserID}
         getAllDetails={getAllDetails}
       />
+      <div>
+        <label
+          htmlFor="sendEmailTo"
+          className=" ml-[3.2rem] text-xl font-bold  "
+        >
+          Send Details to this email
+        </label>
+        <div className="flex ml-[3rem] mt-2">
+          <input
+            id="sendEmailTo"
+            type="text"
+            value={sendEmailTo}
+            onChange={(e) => {
+              setSendEmailTo(e.target.value);
+            }}
+            className="min-w-[30%] px-3 rounded-md outline-none"
+            placeholder="Send to this email"
+            disabled={!edit}
+          />
+          <Button
+            variant="contained"
+            sx={{
+              bgcolor: `${edit ? " " : "#a5a3aa"}`,
+              color: `${edit ? "white" : "black"}`,
+              width: "10%",
+              marginLeft: "3rem",
+              ":hover": {
+                color: "white",
+              },
+            }}
+            onClick={() => setEdit(!edit)}
+          >
+            {!edit ? <EditIcon className="mr-2" /> : ""}
+            {edit ? <SaveIcon className="mr-2" /> : ""}
+
+            {edit ? "Save" : "Edit"}
+          </Button>
+          <Button
+            variant="contained"
+            sx={{
+              bgcolor: "#8a5bf7",
+              width: "10%",
+              marginLeft: "3rem",
+              ":hover": {
+                bgcolor: "#7239f9",
+              },
+            }}
+            onClick={() => {
+              if (selectedDetails.length !== 0) {
+                sendMail();
+              } else {
+                ErrorMsg("Please select details to send mail 🙂");
+              }
+            }}
+          >
+            Send Mail
+          </Button>
+        </div>
+      </div>
       <div className="flex items-center  justify-between border-b-2 sm:mx-[3rem] sm:w-[93vw]  ">
         <Typography
           variant="h5"

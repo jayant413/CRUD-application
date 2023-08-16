@@ -57,7 +57,7 @@ const UpdateUserDetalis = ({
       );
 
       if (res.data.result) {
-        SuccessMsg(res.data.message);
+        SuccessMsg("🎉 User Details Updated successfully ");
         getAllDetails();
         setShowUpdateFrom(false);
       } else {

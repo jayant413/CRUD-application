@@ -14,7 +14,6 @@ function HobbiesComponent({ setHobbies, hobbies }) {
       setHobbies([...hobbies, newHobby]);
       setNewHobby("");
     }
-    console.log(hobbies);
   };
 
   const handleDeleteHobby = (index) => {

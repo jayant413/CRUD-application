@@ -31,9 +31,13 @@ export default function FormDialog({ setShowForm, showForm, getAllDetails }) {
         }
       );
       if (res.data.result) {
-        SuccessMsg(res.data.message);
+        SuccessMsg("🎉 User Details Added successfully ");
         setShowForm(false);
         getAllDetails();
+        setName("");
+        setEmail("");
+        setMobile("");
+        setHobbies([]);
       } else {
         ErrorMsg(res.data.message);
       }
