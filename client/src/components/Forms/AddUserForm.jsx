@@ -8,7 +8,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import HobbiesComponent from "./HobbiesComponent";
 import axios from "axios";
-import { ErrorMsg, SuccessMsg } from "../helper/notify";
+import { ErrorMsg, SuccessMsg } from "../../helper/notify";
 
 export default function FormDialog({ setShowForm, showForm, getAllDetails }) {
   const [name, setName] = React.useState("");
@@ -119,10 +119,14 @@ export default function FormDialog({ setShowForm, showForm, getAllDetails }) {
             <HobbiesComponent setHobbies={setHobbies} hobbies={hobbies} />
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => setShowForm(false)} variant="contained">
+            <Button
+              onClick={() => setShowForm(false)}
+              variant="contained"
+              color="error"
+            >
               Cancel
             </Button>
-            <Button variant="contained" onClick={addUser}>
+            <Button variant="contained" color="primary" onClick={addUser}>
               Add User
             </Button>
           </DialogActions>

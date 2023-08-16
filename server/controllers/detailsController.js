@@ -82,7 +82,7 @@ module.exports.getDetail = async (req, res) => {
             return res.status(200).json({
                 message: "Data fetched successfully",
                 result: true,
-                response: info
+                info: info
             })
         }
     } catch (error) {
