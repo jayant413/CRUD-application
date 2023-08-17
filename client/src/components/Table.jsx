@@ -16,9 +16,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import { ErrorMsg, SuccessMsg } from "../helper/notify";
 
 const Table = () => {
-  const [sendEmailTo, setSendEmailTo] = useState(
-    "jayantsawarkar4103@gmail.com"
-  );
+  const [sendEmailTo, setSendEmailTo] = useState("info@redpositive.in");
   const [userDetails, setUserDetails] = useState([]);
   const [edit, setEdit] = useState(false);
   const [showForm, setShowForm] = useState(false);
