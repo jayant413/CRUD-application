@@ -7,7 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import HobbiesComponent from "./HobbiesComponent";
-import { ErrorMsg, SuccessMsg } from "../../helper/notify";
+import { ErrorMsg, SuccessMsg, WarnMsg } from "../../helper/notify";
 import axios from "axios";
 
 const UpdateUserDetalis = ({
@@ -36,7 +36,7 @@ const UpdateUserDetalis = ({
       setMobile(user.number);
       setHobbies(user.hobbies);
     } catch (error) {
-      ErrorMsg(error.message);
+      console.log(error.message);
     }
   };
 
@@ -45,6 +45,14 @@ const UpdateUserDetalis = ({
   }, [updateUserID]);
 
   const updateUser = async () => {
+    // validate user details
+    if (name === "") return WarnMsg("Please Enter Name");
+    if (email === "") return WarnMsg("Please Enter Email address");
+    if (mobile == "" || isNaN(parseInt(mobile)) || mobile.length != 10)
+      return WarnMsg("Enter Valid Mobile Number");
+
+    if (hobbies.length == 0) return WarnMsg("Select atleast one hobby");
+
     try {
       const res = await axios.put(
         `http://localhost:8000/api/v1/details/updateDetails/${updateUserID}`,
@@ -64,7 +72,7 @@ const UpdateUserDetalis = ({
         ErrorMsg(res.data.message);
       }
     } catch (error) {
-      ErrorMsg(error.message);
+      console.log(error.message);
     }
   };
   return (

@@ -8,7 +8,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import HobbiesComponent from "./HobbiesComponent";
 import axios from "axios";
-import { ErrorMsg, SuccessMsg } from "../../helper/notify";
+import { ErrorMsg, SuccessMsg, WarnMsg } from "../../helper/notify";
 
 export default function FormDialog({ setShowForm, showForm, getAllDetails }) {
   const [name, setName] = React.useState("");
@@ -20,6 +20,15 @@ export default function FormDialog({ setShowForm, showForm, getAllDetails }) {
    *    Add Uset to db
    */
   const addUser = async () => {
+    // validate user details
+    if (name === "") return WarnMsg("Please Enter Name");
+    if (email === "") return WarnMsg("Please Enter Email address");
+
+    if (mobile == "" || isNaN(parseInt(mobile)) || mobile.length != 10)
+      return WarnMsg("Enter Valid Mobile Number");
+
+    if (hobbies.length == 0) return WarnMsg("Select atleast one hobby");
+
     try {
       const res = await axios.post(
         "http://localhost:8000/api/v1/details/addDetails",

@@ -21,6 +21,7 @@ oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
 module.exports.sendMail = async (req, res) => {
     const { selectedDetails, sendEmailTo } = req.body;
+
     const ACCESS_TOKEN = await oAuth2Client.getAccessToken();
 
     try {
@@ -40,13 +41,13 @@ module.exports.sendMail = async (req, res) => {
         });
 
         const tableRows = selectedDetails.map(person => `
-    <tr>
+        <tr>
         <td style="border: 1px solid #ddd; padding: 8px;">${person.name}</td>
         <td style="border: 1px solid #ddd; padding: 8px;">${person.email}</td>
         <td style="border: 1px solid #ddd; padding: 8px;">${person.number}</td>
         <td style="border: 1px solid #ddd; padding: 8px;">${person.hobbies.join(', ')}</td>
-    </tr>
-`).join('');
+        </tr>
+        `).join('');
 
         const info = await transporter.sendMail({
             from: '"Jayant Sawarkar " <dummyxyz2611@gmail.com>',

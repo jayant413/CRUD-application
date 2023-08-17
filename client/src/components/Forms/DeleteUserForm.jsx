@@ -22,7 +22,7 @@ const DeleteUserForm = ({
       );
 
       if (res.data.result) {
-        SuccessMsg("User deleted successfully 🥲 ");
+        SuccessMsg("User deleted successfully  ");
         setShowDeleteForm(false);
         getAllDetails();
       } else {

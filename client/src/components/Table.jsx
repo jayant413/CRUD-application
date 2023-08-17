@@ -78,6 +78,7 @@ const Table = () => {
       SuccessMsg("🥳 Email sent successfully ");
     } catch (error) {
       console.log(error.message);
+      ErrorMsg("Something went wrong Please try again later !!");
     }
   };
 
