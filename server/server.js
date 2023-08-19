@@ -10,7 +10,7 @@ const cors = require("cors");
  *   File Imports
  */
 const connectDB = require("./config/db.js");
-const apiRoutes = require("./routes");
+const apiRoutes = require("./routes/index.js");
 
 
 //  Configuration  
